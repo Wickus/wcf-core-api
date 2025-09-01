@@ -7,6 +7,7 @@ public class Plugin : IApiPlugin
 	public async Task HandleResponse(string result)
 	{
 		Console.WriteLine("The result is: " + result);
-		await Task.Run(() => null);
+
+		await Task.Run(() => Task.CompletedTask);
 	}
 }

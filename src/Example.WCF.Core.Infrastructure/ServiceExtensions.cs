@@ -1,6 +1,8 @@
 using System.Runtime.Loader;
 using Example.WCF.Core.Domain.Interfaces;
 using Example.WCF.Core.Infrastructure.Services;
+using Example.WCF.Core.Infrastructure.Soap;
+using Example.WCF.Core.Infrastructure.Soap.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Example.WCF.Core.Infrastructure;
@@ -56,7 +58,10 @@ public static class ServiceExtensions
 		#endregion
 
 		services.AddScoped<ICertificateProviderService, CertificateProviderService>();
-		
+		services.AddScoped<ISoapFaultService, SoapFaultService>();
+		services.AddScoped<ISoapValidationService, SoapValidationService>();
+		services.AddScoped<SoapFaultService>();
+
 		// Return the updated service collection for chaining
 		return services;
 	}
