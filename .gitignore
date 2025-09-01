@@ -54,4 +54,6 @@ TestResult.xml
 nunit-*.xml
 
 # Misc
+appsettings.*.json
+publish/
 .DS_Store

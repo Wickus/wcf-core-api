@@ -1,22 +1,30 @@
-using CoreWCF;
-using CoreWCF.Configuration;
-using CoreWCF.Description;
+using Example.WCF.Core.Api.Formatters;
 using Example.WCF.Core.Application;
 using Example.WCF.Core.Infrastructure;
-using Example.WCF.Core.Infrastructure.Contracts;
+
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration
+	.SetBasePath(Directory.GetCurrentDirectory())  // ensure correct path
+	.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+	.AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
+
+builder.WebHost.ConfigureKestrel((context, options) =>
+{
+	options.Configure(context.Configuration.GetSection("Kestrel"));
+});
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-// Add CoreWCF services
-builder.Services.AddServiceModelServices(); // <-- register CoreWCF services
-builder.Services.AddServiceModelMetadata(); // optional, for WSDL publishing
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
-
-builder.Services.AddScoped<CalculatorService>();
+builder.Services.AddControllers(options =>
+{
+	options.InputFormatters.Insert(0, new SoapInputFormatter());
+});
 
 WebApplication app = builder.Build();
 
@@ -26,21 +34,8 @@ if (app.Environment.IsDevelopment())
 	app.MapOpenApi();
 }
 
-app.UseServiceModel(serviceBuilder =>
-{
-	serviceBuilder.AddService<CalculatorService>(serviceOptions =>
-    {
-        // ✅ Show server exceptions in SOAP fault (debug only!)
-        serviceOptions.DebugBehavior.IncludeExceptionDetailInFaults = true;
-    });
-	serviceBuilder.AddServiceEndpoint<CalculatorService, ICalculatorService>(
-		new BasicHttpBinding(), "/CalculatorService.svc");
-
-	// Enable WSDL publishing
-	ServiceMetadataBehavior serviceMetadataBehavior = app.Services.GetRequiredService<ServiceMetadataBehavior>();
-	serviceMetadataBehavior.HttpGetEnabled = true;
-});
-
 app.UseHttpsRedirection();
+
+app.MapControllers();
 
 app.Run();
