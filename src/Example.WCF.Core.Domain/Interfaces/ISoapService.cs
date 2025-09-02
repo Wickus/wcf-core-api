@@ -4,5 +4,5 @@ namespace Example.WCF.Core.Domain.Interfaces;
 
 public interface ISoapService
 {
-	Task<string> Process(string message);
+  public Task<string> Process(string message);
 }

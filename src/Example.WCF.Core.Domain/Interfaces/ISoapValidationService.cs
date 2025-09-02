@@ -4,5 +4,6 @@ namespace Example.WCF.Core.Domain.Interfaces;
 
 public interface ISoapValidationService
 {
-	void Validate(XDocument soapMessage);
+  public void Validate(XDocument soapMessage);
+  public void ValidateSignature(XDocument decryptedSoapMessage);
 }

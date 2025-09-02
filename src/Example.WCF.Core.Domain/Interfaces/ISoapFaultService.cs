@@ -1,9 +1,10 @@
 using System.Xml.Linq;
+
 using Example.WCF.Core.Domain.Dto;
 
 namespace Example.WCF.Core.Domain.Interfaces;
 
 public interface ISoapFaultService
 {
-	string CreateSoapFault(SoapFault soapFault);
+  public string CreateSoapFault(SoapFault soapFault);
 }
