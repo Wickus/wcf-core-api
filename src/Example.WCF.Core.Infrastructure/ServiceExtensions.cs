@@ -1,6 +1,7 @@
 using System.Runtime.Loader;
 
 using Example.WCF.Core.Domain.Interfaces;
+using Example.WCF.Core.Domain.Interfaces.Soap;
 using Example.WCF.Core.Infrastructure.Services;
 using Example.WCF.Core.Infrastructure.Soap;
 using Example.WCF.Core.Infrastructure.Soap.Services;
@@ -63,7 +64,8 @@ public static class ServiceExtensions
     services.AddScoped<ISoapFaultService, SoapFaultService>();
     services.AddScoped<ISoapValidationService, SoapValidationService>();
     services.AddScoped<IDecryptionService, DecryptionService>();
-    services.AddScoped<SoapFaultService>();
+    services.AddScoped<ISoapFaultService, SoapFaultService>();
+    services.AddScoped<ISoapContentDecryptionService, SoapContentDecryptionService>();
 
     // Return the updated service collection for chaining
     return services;

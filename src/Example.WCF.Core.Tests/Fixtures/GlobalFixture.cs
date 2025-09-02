@@ -1,4 +1,7 @@
+using System.Xml.Linq;
+
 using Example.WCF.Core.Domain.Interfaces;
+using Example.WCF.Core.Domain.Interfaces.Soap;
 using Example.WCF.Core.Infrastructure.Services;
 using Example.WCF.Core.Infrastructure.Soap;
 
@@ -10,6 +13,8 @@ namespace Example.WCF.Core.Tests.Fixtures;
 public class GlobalFixture
 {
   public ServiceProvider Services { get; }
+  public XDocument EncryptedSoapMessage { get; }
+  public XDocument InvalidSoapMessage { get; }
 
   public GlobalFixture()
   {
@@ -25,6 +30,15 @@ public class GlobalFixture
     services.AddSingleton<IDecryptionService, DecryptionService>();
     services.AddSingleton<ISoapValidationService, SoapValidationService>();
 
+    EncryptedSoapMessage = XDocument.Load(Path.Combine(AppContext.BaseDirectory, "TestData", "EncryptedSoapMessage.xml"));
+    InvalidSoapMessage = XDocument.Load(Path.Combine(AppContext.BaseDirectory, "TestData", "InvalidSoapMessage.xml"));
+
     Services = services.BuildServiceProvider();
+  }
+
+  public bool IsBase64(string value)
+  {
+    Span<byte> buffer = new(new byte[value.Length]);
+    return Convert.TryFromBase64String(value, buffer, out _);
   }
 }

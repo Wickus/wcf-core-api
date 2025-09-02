@@ -1,7 +1,7 @@
 using System.Xml.Linq;
 
 using Example.WCF.Core.Domain.Dto;
-using Example.WCF.Core.Domain.Interfaces;
+using Example.WCF.Core.Domain.Interfaces.Soap;
 
 namespace Example.WCF.Core.Infrastructure.Soap.Services;
 

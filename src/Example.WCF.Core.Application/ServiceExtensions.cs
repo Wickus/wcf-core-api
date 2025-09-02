@@ -1,5 +1,5 @@
 using Example.WCF.Core.Application.Services;
-using Example.WCF.Core.Domain.Interfaces;
+using Example.WCF.Core.Domain.Interfaces.Soap;
 
 using Microsoft.Extensions.DependencyInjection;
 

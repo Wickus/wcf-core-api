@@ -1,7 +1,5 @@
-using System.Xml.Linq;
-
 using Example.WCF.Core.Domain.Dto;
-using Example.WCF.Core.Domain.Interfaces;
+using Example.WCF.Core.Domain.Interfaces.Soap;
 using Example.WCF.Core.Infrastructure.Soap;
 
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +11,11 @@ namespace Example.WCF.Core.Api.Controllers
   public class ResponseController(
     ISoapService soapService,
     ISoapFaultService soapFaultService,
-    ISoapValidationService soapValidationService,
-    IDecryptionService decryptionService): ControllerBase
+    ISoapValidationService soapValidationService): ControllerBase
   {
     private readonly ISoapService _soapService = soapService;
     private readonly ISoapFaultService _soapFaultService = soapFaultService;
     private readonly ISoapValidationService _soapValidationService = soapValidationService;
-    private readonly IDecryptionService _decryptionService = decryptionService;
 
     [HttpPost]
     [Consumes("application/soap+xml")]
@@ -28,11 +24,7 @@ namespace Example.WCF.Core.Api.Controllers
     {
       try
       {
-        XDocument soapDocument = XDocument.Parse(soapMessage);
-
-        _soapValidationService.Validate(soapDocument);
-
-        string responseContent = await _soapService.Process(soapDocument.ToString());
+        string responseContent = await _soapService.Process(soapMessage);
 
         return Content(responseContent, "application/soap+xml", System.Text.Encoding.UTF8);
       }
