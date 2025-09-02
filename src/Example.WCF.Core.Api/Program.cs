@@ -6,13 +6,13 @@ using Example.WCF.Core.Infrastructure;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
-	.SetBasePath(Directory.GetCurrentDirectory())  // ensure correct path
-	.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-	.AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
+  .SetBasePath(Directory.GetCurrentDirectory())  // ensure correct path
+  .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+  .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
 
 builder.WebHost.ConfigureKestrel((context, options) =>
 {
-	options.Configure(context.Configuration.GetSection("Kestrel"));
+  options.Configure(context.Configuration.GetSection("Kestrel"));
 });
 
 // Add services to the container.
@@ -23,7 +23,7 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 builder.Services.AddControllers(options =>
 {
-	options.InputFormatters.Insert(0, new SoapInputFormatter());
+  options.InputFormatters.Insert(0, new SoapInputFormatter());
 });
 
 WebApplication app = builder.Build();
@@ -31,7 +31,7 @@ WebApplication app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-	app.MapOpenApi();
+  app.MapOpenApi();
 }
 
 app.UseHttpsRedirection();

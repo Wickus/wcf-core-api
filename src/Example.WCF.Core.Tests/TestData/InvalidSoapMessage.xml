@@ -1,0 +1,19 @@
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope">
+  <s:Header>
+    <h:Header xmlns:h="http://SecureX.Common/V1"
+      xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <h:Additional i:nil="true"/>
+      <h:ConsumerBusinessUnit>00000000-0000-0000-0000-000000000000</h:ConsumerBusinessUnit>
+      <h:ConsumerReference>Testing_Soap</h:ConsumerReference>
+      <h:ExchangeReference>0</h:ExchangeReference>
+      <h:InitiatingIP>127.0.0.1</h:InitiatingIP>
+      <h:ProductId>0</h:ProductId>
+      <h:ProviderBusinessUnit>00000000-0000-0000-0000-000000000000</h:ProviderBusinessUnit>
+      <h:ProviderReference i:nil="true"/>
+      <h:TransactionStatus>0</h:TransactionStatus>
+    </h:Header>
+  </s:Header>
+  <s:Body>
+    <Body></Body>
+  </s:Body>
+</s:Envelope>

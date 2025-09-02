@@ -2,5 +2,5 @@ namespace Example.WCF.Core.Domain.Interfaces;
 
 public interface IApiPlugin
 {
-	Task HandleResponse(string result);
+  public Task HandleResponse(string result);
 }
