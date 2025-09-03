@@ -1,5 +1,3 @@
-using System.Xml.Linq;
-
 namespace Example.WCF.Core.Domain.Interfaces.Soap;
 
 public interface ISoapService

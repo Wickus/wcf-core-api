@@ -6,7 +6,7 @@ using Example.WCF.Core.Infrastructure;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
-  .SetBasePath(Directory.GetCurrentDirectory())  // ensure correct path
+  .SetBasePath(Directory.GetCurrentDirectory())
   .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
   .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
 

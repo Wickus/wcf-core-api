@@ -4,7 +4,6 @@ using Example.WCF.Core.Domain.Interfaces;
 using Example.WCF.Core.Domain.Interfaces.Soap;
 using Example.WCF.Core.Infrastructure.Services;
 using Example.WCF.Core.Infrastructure.Soap;
-using Example.WCF.Core.Infrastructure.Soap.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 
