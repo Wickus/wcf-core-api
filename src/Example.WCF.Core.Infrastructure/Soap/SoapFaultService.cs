@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using Example.WCF.Core.Domain.Dto;
 using Example.WCF.Core.Domain.Interfaces.Soap;
 
-namespace Example.WCF.Core.Infrastructure.Soap.Services;
+namespace Example.WCF.Core.Infrastructure.Soap;
 
 public class SoapFaultService: ISoapFaultService
 {

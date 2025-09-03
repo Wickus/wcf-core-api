@@ -23,4 +23,16 @@ public class ValueExtractionTest(GlobalFixture globalFixture)
     Assert.True(globalFixture.IsBase64(encryptedData));
   }
 
+  [Fact]
+  public void ShouldReturnEncryptedAESKey()
+  {
+    // Act
+    string encryptedData = EncryptedDocument.ExtractSecurityElement().ExtractEncryptedAesKeyValue();
+
+    // Assert
+    Assert.NotNull(encryptedData);
+    Assert.NotEmpty(encryptedData);
+    Assert.True(globalFixture.IsBase64(encryptedData));
+  }
+
 }
